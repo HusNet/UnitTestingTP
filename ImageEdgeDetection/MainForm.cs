@@ -218,6 +218,7 @@ namespace ImageEdgeDetection
 
         private void ImageFilterSelectionEventHandler(object sender, EventArgs e)
         {
+            //test aure
             if (cmbImageFilter.SelectedIndex == 0)
                 cmbEdgeDetection.Enabled = false;
             else

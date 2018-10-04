@@ -10,6 +10,8 @@ namespace ImageEdgeDetection
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+        //test aure 
         [STAThread]
         static void Main()
         {
