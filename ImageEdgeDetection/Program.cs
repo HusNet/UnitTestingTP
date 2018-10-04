@@ -12,7 +12,7 @@ namespace ImageEdgeDetection
         /// 
         /// </summary>
         /// 
-        //test aure 
+        //test uuuuuuuu
         [STAThread]
         static void Main()
         {
