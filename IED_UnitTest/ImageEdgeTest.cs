@@ -52,7 +52,7 @@ namespace IED_UnitTest
 
 
         [TestMethod]
-        public void EdgeTestPrewittFilter(Bitmap bitmapImg)
+        public void EdgeTestPrewittFilter()
         {
             //load the original bitmap
             bitmapOriginal = loadOriginalPicture();
@@ -86,7 +86,7 @@ namespace IED_UnitTest
         }
 
         [TestMethod]
-        public void EdgeTestSobel3x3Filter(Bitmap bitmapImg)
+        public void EdgeTestSobel3x3Filter()
         {
             //load the original bitmap
             bitmapOriginal = loadOriginalPicture();
@@ -122,6 +122,41 @@ namespace IED_UnitTest
         }
 
 
+        [TestMethod]
+        public void EdgeTestKirschFilter()
+        {
+            //load the original bitmap
+            bitmapOriginal = loadOriginalPicture();
+
+            //apply Image Filter filter without grayscale
+            Bitmap bitmapOriginalWithEdge = ExtBitmap.KirschFilter(bitmapOriginal, false);
+
+            //apply Image Filter filter with grayscale
+            Bitmap bitmapOriginalWithEdge_GrayScale = ExtBitmap.KirschFilter(bitmapOriginal, true);
+
+
+            //apply manually filter on the bitmap expected without grayscale      
+            Bitmap bitmapExpected = ExtBitmap.ConvolutionFilter(bitmapOriginal,
+                                                Matrix.Kirsch3x3Horizontal,
+                                                  Matrix.Kirsch3x3Vertical,
+                                                        1.0, 0, false);
+
+
+            //apply manually filter on the bitmap expected with grayscale      
+            Bitmap bitmapExpected_GrayScale = ExtBitmap.ConvolutionFilter(bitmapOriginal,
+                                                Matrix.Kirsch3x3Horizontal,
+                                                  Matrix.Kirsch3x3Vertical,
+                                                        1.0, 0, true);
+
+
+            bool result = comparePixelImages(bitmapOriginalWithEdge, bitmapExpected);
+            bool result_Grayscale = comparePixelImages(bitmapOriginalWithEdge_GrayScale, bitmapExpected_GrayScale);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(result_Grayscale);
+
+
+        }
 
 
     }

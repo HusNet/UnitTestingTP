@@ -50,7 +50,7 @@ namespace IED_UnitTest
 
 
         [TestMethod]
-        public void FilterTestBlackAndWhite(Bitmap bitmapImg)
+        public void FilterTestBlackAndWhite()
         {
             //load the original bitmap
             bitmapOriginal = loadOriginalPicture();
