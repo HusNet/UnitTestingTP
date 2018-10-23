@@ -33,7 +33,7 @@ namespace ImageEdgeDetection
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select an image file.";
-            ofd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
+            ofd.Filter = "Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png";
             ofd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
