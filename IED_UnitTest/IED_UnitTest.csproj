@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ImageEdgeTest.cs" />
     <Compile Include="ImageFilterTest.cs" />
+    <Compile Include="ImageUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

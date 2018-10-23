@@ -10,50 +10,12 @@ namespace IED_UnitTest
     public class ImageFilterTest
     {
         Bitmap bitmapOriginal;
-       
-        public Bitmap loadOriginalPicture()
-        {
-            bitmapOriginal = null;
-            string pathBitmapOriginal = "Assets\\Images\\ImageTesting.jpg";
-            StreamReader streamReader = new StreamReader(pathBitmapOriginal);
-            bitmapOriginal = (Bitmap)Bitmap.FromStream(streamReader.BaseStream);
-            streamReader.Close();
-
-            return bitmapOriginal;
-     
-        }
-
-        public bool comparePixelImages(Bitmap bitmapOrignal, Bitmap bitmapExpected)
-        {
-            if (bitmapOrignal.Size == bitmapExpected.Size)
-            {
-                for (int x = 0; x < bitmapOrignal.Width; ++x)
-                {
-                    for (int y = 0; y < bitmapOrignal.Height; ++y)
-                    {
-                        if (bitmapOrignal.GetPixel(x, y) != bitmapExpected.GetPixel(x, y))
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                return false;
-
-            }
-
-            return true;
-
-        }
-
-
+        
         [TestMethod]
         public void FilterTestBlackAndWhite()
         {
             //load the original bitmap
-            bitmapOriginal = loadOriginalPicture();
+            bitmapOriginal = ImageUtils.loadOriginalPicture();
          
             //apply Image Filter filter
             Bitmap bitmapOriginalWithImageFilters = ImageFilters.BlackWhite(bitmapOriginal);
@@ -74,10 +36,10 @@ namespace IED_UnitTest
                 }
             }
 
-            bool result = comparePixelImages(bitmapOriginalWithImageFilters, bitmapExpected);
+            //check if the pixel of the two images are the same
+            bool result = ImageUtils.comparePixelImages(bitmapOriginalWithImageFilters, bitmapExpected);
+
             Assert.IsTrue(result);
-
-
 
         }
     }

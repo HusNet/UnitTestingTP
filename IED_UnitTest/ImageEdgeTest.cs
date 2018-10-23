@@ -13,49 +13,12 @@ namespace IED_UnitTest
     {
         Bitmap bitmapOriginal;
 
-        public Bitmap loadOriginalPicture()
-        {
-            bitmapOriginal = null;
-            string pathBitmapOriginal = "Assets\\Images\\ImageTesting.jpg";
-            StreamReader streamReader = new StreamReader(pathBitmapOriginal);
-            bitmapOriginal = (Bitmap)Bitmap.FromStream(streamReader.BaseStream);
-            streamReader.Close();
-
-            return bitmapOriginal;
-
-        }
-
-        public bool comparePixelImages(Bitmap bitmapOrignal, Bitmap bitmapExpected)
-        {
-            if (bitmapOrignal.Size == bitmapExpected.Size)
-            {
-                for (int x = 0; x < bitmapOrignal.Width; ++x)
-                {
-                    for (int y = 0; y < bitmapOrignal.Height; ++y)
-                    {
-                        if (bitmapOrignal.GetPixel(x, y) != bitmapExpected.GetPixel(x, y))
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                return false;
-
-            }
-
-            return true;
-           
-        }
-
 
         [TestMethod]
         public void EdgeTestPrewittFilter()
         {
             //load the original bitmap
-            bitmapOriginal = loadOriginalPicture();
+            bitmapOriginal = ImageUtils.loadOriginalPicture();
 
             //apply Image Filter filter without grayscale
             Bitmap bitmapOriginalWithEdge = ExtBitmap.PrewittFilter(bitmapOriginal, false);
@@ -76,9 +39,9 @@ namespace IED_UnitTest
                                                 Matrix.Prewitt3x3Vertical,
                                                        1.0, 0, true);
 
-
-            bool result = comparePixelImages(bitmapOriginalWithEdge, bitmapExpected);
-            bool result_Grayscale = comparePixelImages(bitmapOriginalWithEdge_GrayScale, bitmapExpected_GrayScale);
+            //result if all pixels are the same
+            bool result = ImageUtils.comparePixelImages(bitmapOriginalWithEdge, bitmapExpected);
+            bool result_Grayscale = ImageUtils.comparePixelImages(bitmapOriginalWithEdge_GrayScale, bitmapExpected_GrayScale);
 
             Assert.IsTrue(result);
             Assert.IsTrue(result_Grayscale);
@@ -89,7 +52,7 @@ namespace IED_UnitTest
         public void EdgeTestSobel3x3Filter()
         {
             //load the original bitmap
-            bitmapOriginal = loadOriginalPicture();
+            bitmapOriginal = ImageUtils.loadOriginalPicture();
 
             //apply Image Filter filter without grayscale
             Bitmap bitmapOriginalWithEdge = ExtBitmap.Sobel3x3Filter(bitmapOriginal, false);
@@ -112,8 +75,8 @@ namespace IED_UnitTest
                                                         1.0, 0, true);
 
 
-            bool result = comparePixelImages(bitmapOriginalWithEdge, bitmapExpected);
-            bool result_Grayscale = comparePixelImages(bitmapOriginalWithEdge_GrayScale, bitmapExpected_GrayScale);
+            bool result = ImageUtils.comparePixelImages(bitmapOriginalWithEdge, bitmapExpected);
+            bool result_Grayscale = ImageUtils.comparePixelImages(bitmapOriginalWithEdge_GrayScale, bitmapExpected_GrayScale);
 
             Assert.IsTrue(result);
             Assert.IsTrue(result_Grayscale);
@@ -126,7 +89,7 @@ namespace IED_UnitTest
         public void EdgeTestKirschFilter()
         {
             //load the original bitmap
-            bitmapOriginal = loadOriginalPicture();
+            bitmapOriginal = ImageUtils.loadOriginalPicture();
 
             //apply Image Filter filter without grayscale
             Bitmap bitmapOriginalWithEdge = ExtBitmap.KirschFilter(bitmapOriginal, false);
@@ -149,8 +112,8 @@ namespace IED_UnitTest
                                                         1.0, 0, true);
 
 
-            bool result = comparePixelImages(bitmapOriginalWithEdge, bitmapExpected);
-            bool result_Grayscale = comparePixelImages(bitmapOriginalWithEdge_GrayScale, bitmapExpected_GrayScale);
+            bool result = ImageUtils.comparePixelImages(bitmapOriginalWithEdge, bitmapExpected);
+            bool result_Grayscale = ImageUtils.comparePixelImages(bitmapOriginalWithEdge_GrayScale, bitmapExpected_GrayScale);
 
             Assert.IsTrue(result);
             Assert.IsTrue(result_Grayscale);
